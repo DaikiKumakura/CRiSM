@@ -30,7 +30,7 @@ def run_pipeline(input_dir, output_dir, hmm_file, list_file, threads):
         'bash', 'crism/scripts/extract_genomes.sh',
         '-i', f'{output_dir}/02_finder/faa',
         '-o', f'{output_dir}/04_extract_genomes',
-        '-r', list_file
+        '-r', f'{output_dir}/03_extract_markers/0_full_markergenes_genoms.txt'
     ])
     
     # Step 5: Combine marker genes
