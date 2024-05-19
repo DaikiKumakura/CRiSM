@@ -40,10 +40,10 @@ pip install crism
 Install the required bioinformatics tools using Conda from the Bioconda channel:
 
 ```bash
-conda install -c bioconda prodigal hmmer muscle trimal iqtree2
+conda install -c bioconda -y prodigal hmmer muscle trimal iqtree biopython
 ```
 
-This will install Prodigal, HMMER, MUSCLE, TrimAl, and IQ-TREE2, which are essential for running the CRiSM pipeline.
+This will install Prodigal, HMMER, MUSCLE, TrimAl, IQ-TREE2, and biopython which are essential for running the CRiSM pipeline.
 
 ## Usage
 
