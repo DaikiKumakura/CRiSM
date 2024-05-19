@@ -32,7 +32,7 @@ conda activate crism
 Install CRiSM directly from PyPI:
 
 ```bash
-pip install crism
+pip install CRiSM
 ```
 
 ### Install External Bioinformatics Tools
