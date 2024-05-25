@@ -67,11 +67,12 @@ CRiSM performs the following analysis steps:
 5. **Reformat**: Same as step 1.
 6. **Alignment & Trimming**: Aligns with MUSCLE using "-super5" and trims with TrimAl using "-automated1".
 7. **Concatenation**: Concatenates trimmed marker sequences for each organism.
-8. **Make tree**: Performs phylogenetic analysis using IQ-TREE2 with "-st AA -bb 1000 -m LG+G4+FO+I".
+8. **Make tree**: Performs phylogenetic analysis using IQ-TREE2 with "-st AA -bb 1000 -m LG+G4+FO+I".　
+
 
 ### Command Line Options
 
-- `-i`, `--input`: Specify the input directory containing the genome files (Only fna file).
+- `-i`, `--input`: Specify the input directory containing the genome files (fna or fasta file).
 - `-o`, `--output`: Specify the output directory for the analysis results.
 - `--db`: Path to the HMM database file.
 - `--list`: Path to the file listing the marker genes.
