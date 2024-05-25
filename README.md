@@ -58,7 +58,7 @@ crism -i <input_dir> -o <output_dir> --hmm <markergene.hmm> --list <markergene_l
 
 ### Command Line Options
 
-- `-i`, `--input`: Specify the input directory containing the genome files.
+- `-i`, `--input`: Specify the input directory containing the genome files (Only fna file).
 - `-o`, `--output`: Specify the output directory for the analysis results.
 - `--hmm`: Path to the HMM database file.
 - `--list`: Path to the file listing the marker genes.
