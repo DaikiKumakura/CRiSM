@@ -56,6 +56,14 @@ To run CRiSM, use the following command format:
 crism -i <input_dir> -o <output_dir> --db <markergene.hmm> --list <markergene_list.txt> -t <threads>
 ```
 
+### Command Line Options
+
+- `-i`, `--input`: Specify the input directory containing the genome files (fna or fasta file).
+- `-o`, `--output`: Specify the output directory for the analysis results.
+- `--db`: Path to the HMM database file.
+- `--list`: Path to the file listing the marker genes.
+- `-t`, `--threads`: Number of threads to use for the analysis.
+
 ## DESCRIPTION
 
 CRiSM performs the following analysis steps:
@@ -68,15 +76,6 @@ CRiSM performs the following analysis steps:
 6. **Alignment & Trimming**: Aligns with MUSCLE using "-super5" and trims with TrimAl using "-automated1".
 7. **Concatenation**: Concatenates trimmed marker sequences for each organism.
 8. **Make tree**: Performs phylogenetic analysis using IQ-TREE2 with "-st AA -bb 1000 -m LG+G4+FO+I".　
-
-
-### Command Line Options
-
-- `-i`, `--input`: Specify the input directory containing the genome files (fna or fasta file).
-- `-o`, `--output`: Specify the output directory for the analysis results.
-- `--db`: Path to the HMM database file.
-- `--list`: Path to the file listing the marker genes.
-- `-t`, `--threads`: Number of threads to use for the analysis.
 
 ## CITATION
 
