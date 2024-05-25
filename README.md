@@ -50,7 +50,7 @@ This will install Prodigal, HMMER, MUSCLE, TrimAl, IQ-TREE2, and biopython which
 To run CRiSM, use the following command format:
 
 ```bash
-crism -i <input_dir> -o <output_dir> --hmm <markergenes.hmm> --list <markergenes_list.txt> -t <threads>
+crism -i <input_dir> -o <output_dir> --hmm <markergene.hmm> --list <markergene_list.txt> -t <threads>
 ```
 
 ### Command Line Options
