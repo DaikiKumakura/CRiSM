@@ -53,14 +53,14 @@ This will install Prodigal, HMMER, MUSCLE, TrimAl, IQ-TREE2, and biopython which
 To run CRiSM, use the following command format:
 
 ```bash
-crism -i <input_dir> -o <output_dir> --hmm <markergene.hmm> --list <markergene_list.txt> -t <threads>
+crism -i <input_dir> -o <output_dir> --db <markergene.hmm> --list <markergene_list.txt> -t <threads>
 ```
 
 ### Command Line Options
 
 - `-i`, `--input`: Specify the input directory containing the genome files (Only fna file).
 - `-o`, `--output`: Specify the output directory for the analysis results.
-- `--hmm`: Path to the HMM database file.
+- `--db`: Path to the HMM database file.
 - `--list`: Path to the file listing the marker genes.
 - `-t`, `--threads`: Number of threads to use for the analysis.
 
