@@ -56,6 +56,19 @@ To run CRiSM, use the following command format:
 crism -i <input_dir> -o <output_dir> --db <markergene.hmm> --list <markergene_list.txt> -t <threads>
 ```
 
+## DESCRIPTION
+
+CRiSM performs the following analysis steps:
+
+1. **Reformat**: Replaces characters such as spaces, ".", ",", ":", ";" in fna file names and read names with "_".
+2. **Find**: Annotates using Prodigal and searches with HMMER at E=1E-5.
+3. **Extract**: Extracts marker sequences for organisms containing all specified markers from the database input.
+4. **Combine**: Combines marker sequences for each marker type.
+5. **Reformat**: Same as step 1.
+6. **Alignment & Trimming**: Aligns with MUSCLE using "-super5" and trims with TrimAl using "-automated1".
+7. **Concatenation**: Concatenates trimmed marker sequences for each organism.
+8. **Make tree**: Performs phylogenetic analysis using IQ-TREE2 with "-st AA -bb 1000 -m LG+G4+FO+I".
+
 ### Command Line Options
 
 - `-i`, `--input`: Specify the input directory containing the genome files (Only fna file).
