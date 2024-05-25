@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='CRiSM',
-    version='0.1.0',
+    version='0.1.6',
     author='Daiki Kumakura',
     author_email='kmkr.daiki@gmail.com',
     description=('Concatenated Ribosomal Sequence Marker gene analysis tool '
@@ -12,8 +12,7 @@ setup(
     url='https://github.com/DaikiKumakura/CRiSM',
     packages=find_packages(),
     install_requires=[
-        'biopython>=1.78',
-        'numpy>=1.19'
+        'numpy'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
