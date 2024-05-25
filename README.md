@@ -1,5 +1,8 @@
 # Concatenated Ribosomal Sequence Marker gene (CRiSM)
 
+> [!WARNING]
+> This package is the prototype! So, you can NOT install "pip install." If you are intersted in this packege, you should install by [CRiSM for TestPyPI](https://test.pypi.org/project/CRiSM/)
+
 CRiSM (Concatenated Ribosomal Sequence Marker gene) is designed for phylogenetic analysis using concatenated ribosomal protein marker genes, primarily focusing on 16 specific ribosomal proteins in CPR (Candidate Phyla Radiation) genomes. While it is tailored for CPR genomes, CRiSM is flexible enough to accommodate any prokaryotic genomes and user-specified marker genes.
 
 ## Features
