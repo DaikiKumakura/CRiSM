@@ -64,6 +64,12 @@ crism -i <input_dir> -o <output_dir> --hmm <markergene.hmm> --list <markergene_l
 - `--list`: Path to the file listing the marker genes.
 - `-t`, `--threads`: Number of threads to use for the analysis.
 
+## CITATION
+
+If you use CRiSM in your research, please cite the following:
+
+Kumakura, D. (2024). CRiSM: Concatenated Ribosomal Sequence Marker gene package for phylogenetic analysis. GitHub repository. Available at [https://github.com/DaikiKumakura/CRiSM](https://github.com/DaikiKumakura/CRiSM).
+
 ## Contributing
 
 Contributions to CRiSM are welcome! If you have suggestions for improvements or new features, please fork the repository, make your changes, and submit a pull request.
