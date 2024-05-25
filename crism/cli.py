@@ -15,7 +15,7 @@ def main():
     args = parser.parse_args()
 
     # パイプラインの実行
-    run_pipeline(args.input, args.output, args.hmm, args.list, args.threads)
+    run_pipeline(args.input, args.output, args.db, args.list, args.threads)
 
 if __name__ == "__main__":
     main()
