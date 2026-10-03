@@ -100,3 +100,5 @@ CRiSM is released under the MIT License. See the LICENSE file in the project rep
 `python -m unittest -q` checks FASTA reformatting from another working directory and failure propagation. These checks do not validate the complete phylogenetic workflow or its scientific results. External tools listed above are still required.
 
 On 2026-10-03, the wheel was also built and installed into an isolated directory. CLI help, FASTA reformatting from another working directory, and inclusion of the bundled HMM files were verified. Full marker discovery, alignment and tree inference were not executed.
+
+Concatenation requires every listed marker, equal nonzero lengths within each alignment, and identical unique sample IDs across markers. Invalid inputs stop before writing the concatenated output; sample order is deterministic. Lightweight GitHub Actions checks run on pushes and pull requests. Full biological validation is outside these checks.
