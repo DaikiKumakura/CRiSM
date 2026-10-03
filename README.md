@@ -48,7 +48,9 @@ Install the required bioinformatics tools using Conda from the Bioconda channel:
 conda install -c bioconda -y prodigal hmmer muscle trimal iqtree biopython
 ```
 
-This will install Prodigal, HMMER, MUSCLE, TrimAl, IQ-TREE2, and biopython which are essential for running the CRiSM pipeline.
+The pipeline invokes `prodigal`, `hmmsearch`, `cut`, `muscle`, `trimal`, and `iqtree2` by these executable names. They must be on PATH. MUSCLE must support the version-5 `-super5` interface; MUSCLE 3 is not compatible with the implemented command. Check `iqtree2 --version` after installation, since the Conda package name alone does not guarantee this executable is available. `cut` is supplied by the Unix environment.
+
+The Python smoke checks below can run without these external tools; passing them does not establish compatibility of the full toolchain.
 
 ## Usage
 
@@ -96,3 +98,5 @@ CRiSM is released under the MIT License. See the LICENSE file in the project rep
 ## Minimal validation
 
 `python -m unittest -q` checks FASTA reformatting from another working directory and failure propagation. These checks do not validate the complete phylogenetic workflow or its scientific results. External tools listed above are still required.
+
+On 2026-10-03, the wheel was also built and installed into an isolated directory. CLI help, FASTA reformatting from another working directory, and inclusion of the bundled HMM files were verified. Full marker discovery, alignment and tree inference were not executed.
