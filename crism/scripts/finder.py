@@ -36,10 +36,10 @@ def main():
         temp_txt_path = os.path.join(output_dir, "temp1.txt")
         prodigal_cmd = ["prodigal", "-a", temp_faa_path, "-i", in_fna, "-m", "-o", temp_txt_path, "-p", "meta", "-q"]
         print(f"Running Prodigal: {' '.join(prodigal_cmd)}")
-        subprocess.call(prodigal_cmd)
+        subprocess.run(prodigal_cmd, check=True)
         if os.path.exists(temp_faa_path):
             with open(faa_path, "w") as outfile:
-                subprocess.call(["cut", "-f1", "-d", " ", temp_faa_path], stdout=outfile)
+                subprocess.run(["cut", "-f1", "-d", " ", temp_faa_path], stdout=outfile, check=True)
             os.remove(temp_faa_path)
             os.remove(temp_txt_path)
             print(f"Prodigal created {faa_path}")
@@ -67,7 +67,7 @@ def main():
         with open(log_file, "w") as hmmer_log:
             hmmsearch_cmd = ["hmmsearch", "--cut_tc", "--tblout", tbl_file, "--notextw", markerdb, in_faa]
             print(f"Running hmmsearch: {' '.join(hmmsearch_cmd)}")
-            subprocess.call(hmmsearch_cmd, stdout=hmmer_log)
+            subprocess.run(hmmsearch_cmd, stdout=hmmer_log, check=True)
             if os.path.exists(tbl_file):
                 print(f"hmmsearch created {tbl_file}")
             else:

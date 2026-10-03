@@ -21,11 +21,11 @@ def main(input_dir, output_dir, threads):
 
         muscle_cmd = ["muscle", "-super5", faa_file, "-output", aln_output, "-threads", str(threads)]
         print(f"Running muscle: {' '.join(muscle_cmd)}")
-        subprocess.call(muscle_cmd)
+        subprocess.run(muscle_cmd, check=True)
         
         trimal_cmd = ["trimal", "-automated1", "-in", aln_output, "-out", trim_output]
         print(f"Running trimal: {' '.join(trimal_cmd)}")
-        subprocess.call(trimal_cmd)
+        subprocess.run(trimal_cmd, check=True)
     
     print("Processing completed.")
 
