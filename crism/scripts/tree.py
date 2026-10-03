@@ -26,7 +26,7 @@ def main(aln_file, output_dir, threads):
     ]
 
     print(f"Running iqtree2: {' '.join(iqtree_cmd)}")
-    subprocess.call(iqtree_cmd)
+    subprocess.run(iqtree_cmd, check=True)
 
     result_files = [
         f"{base_name}.uniqueseq.phy", f"{base_name}.treefile", f"{base_name}.splits.nex",

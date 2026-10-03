@@ -7,12 +7,13 @@ setup(
     author_email='kmkr.daiki@gmail.com',
     description=('Concatenated Ribosomal Sequence Marker gene analysis tool '
                  'for CPR and other prokaryotic genomes'),
-    long_description=open('README.md').read(),
+    long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/DaikiKumakura/CRiSM',
     packages=find_packages(),
     install_requires=[
-        'numpy'
+        'numpy',
+        'biopython'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -34,7 +35,7 @@ setup(
     },
     include_package_data=True,
     package_data={
-        'crism': ['data/*', 'scripts/*'],
+        'crism': ['data/marker_and_list/*', 'scripts/*'],
     },
     keywords='bioinformatics phylogenetics genomics CPR ribosome CRiSM bacteria',
     license='MIT',

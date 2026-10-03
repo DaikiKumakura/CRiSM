@@ -1,7 +1,7 @@
 # Concatenated Ribosomal Sequence Marker gene (CRiSM)
 
 > [!WARNING]
-> This package is the prototype! So, you can NOT install "pip install." If you are intersted in this packege, you should install by [CRiSM for TestPyPI](https://test.pypi.org/project/CRiSM/)
+> CRiSM is a prototype. The source installation below is the documented route; a stable PyPI release is not assumed.
 
 CRiSM (Concatenated Ribosomal Sequence Marker gene) is designed for phylogenetic analysis using concatenated ribosomal protein marker genes, primarily focusing on 16 specific ribosomal proteins in CPR (Candidate Phyla Radiation) genomes. While it is tailored for CPR genomes, CRiSM is flexible enough to accommodate any prokaryotic genomes and user-specified marker genes.
 
@@ -32,10 +32,12 @@ conda activate crism
 
 ### Install CRiSM
 
-Install CRiSM directly from PyPI:
+Install from this repository (in your activated environment):
 
 ```bash
-pip install CRiSM
+git clone https://github.com/DaikiKumakura/CRiSM.git
+cd CRiSM
+python -m pip install .
 ```
 
 ### Install External Bioinformatics Tools
@@ -90,3 +92,7 @@ Contributions to CRiSM are welcome! If you have suggestions for improvements or 
 ## License
 
 CRiSM is released under the MIT License. See the LICENSE file in the project repository for more details.
+
+## Minimal validation
+
+`python -m unittest -q` checks FASTA reformatting from another working directory and failure propagation. These checks do not validate the complete phylogenetic workflow or its scientific results. External tools listed above are still required.
