@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install .
+      - run: python -m pip wheel --no-deps --wheel-dir dist .
+      - run: python -m pip install dist/*.whl
       - run: python -m unittest -v
       - run: cd /tmp && crism --help
+      - run: cd /tmp && python "$GITHUB_WORKSPACE/ci/verify_installed.py"
