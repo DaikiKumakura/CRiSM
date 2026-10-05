@@ -19,16 +19,23 @@ def main(input_dir, output_dir):
         print(f"Error: Input directory {input_dir} does not exist.")
         sys.exit(1)
     
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-    
+    planned = []
+    destinations = set()
     for ext in ('*.fna', '*.faa', '*.fasta'):
         for file in glob.glob(os.path.join(input_dir, ext)):
             filename = os.path.basename(file)
             filename_without_ext = os.path.splitext(filename)[0]
             new_filename = filename_without_ext.replace('.', '_') + os.path.splitext(filename)[1]
             output_file = os.path.join(output_dir, new_filename)
-            reformat_fasta(file, output_file)
+            destination = os.path.normcase(os.path.abspath(output_file))
+            if destination in destinations or os.path.exists(output_file):
+                raise ValueError(f"Refusing to overwrite FASTA output: {output_file}")
+            destinations.add(destination)
+            planned.append((file, output_file))
+
+    os.makedirs(output_dir, exist_ok=True)
+    for file, output_file in planned:
+        reformat_fasta(file, output_file)
     
     print(f"Reformatting completed. Reformatted files are saved in {output_dir}.")
 
