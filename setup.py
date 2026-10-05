@@ -25,7 +25,8 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
-        'Operating System :: OS Independent',
+        'Operating System :: POSIX :: Linux',
+        'Operating System :: MacOS',
     ],
     python_requires='>=3.6',
     entry_points={
@@ -40,7 +41,7 @@ setup(
     keywords='bioinformatics phylogenetics genomics CPR ribosome CRiSM bacteria',
     license='MIT',
     project_urls={
-        'Documentation': 'https://github.com/DaikiKumakura/CRiSM/README.md',  # Optional if you have specific documentation site
+        'Documentation': 'https://github.com/DaikiKumakura/CRiSM/blob/main/README.md',
         'Source': 'https://github.com/DaikiKumakura/CRiSM',
         'Tracker': 'https://github.com/DaikiKumakura/CRiSM/issues',
     },
