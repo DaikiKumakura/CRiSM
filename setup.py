@@ -4,7 +4,6 @@ setup(
     name='CRiSM',
     version='0.1.9',
     author='Daiki Kumakura',
-    author_email='55353329+DaikiKumakura@users.noreply.github.com',
     description=('Concatenated Ribosomal Sequence Marker gene analysis tool '
                  'for CPR and other prokaryotic genomes'),
     long_description=open('README.md', encoding='utf-8').read(),
