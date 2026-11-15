@@ -1,108 +1,117 @@
-# Concatenated Ribosomal Sequence Marker gene (CRiSM)
+# CRiSM
+
+**Concatenated Ribosomal Sequence Marker gene: a phylogenetic tree from
+genome FASTA files with one command, using concatenated marker genes.**
 
 > [!WARNING]
-> CRiSM is a prototype. The source installation below is the documented route; a stable PyPI release is not assumed.
+> CRiSM is a prototype. Installation from source is the documented route, and
+> the complete workflow with the external tools has not been validated (see
+> [Status](#status)).
 
-CRiSM (Concatenated Ribosomal Sequence Marker gene) is designed for phylogenetic analysis using concatenated ribosomal protein marker genes, primarily focusing on 16 specific ribosomal proteins in CPR (Candidate Phyla Radiation) genomes. While it is tailored for CPR genomes, CRiSM is flexible enough to accommodate any prokaryotic genomes and user-specified marker genes.
+CRiSM finds marker genes in prokaryotic genomes, extracts them for the genomes
+that contain all of them, aligns and trims each marker, concatenates the
+alignments and infers a maximum-likelihood tree. It was designed for the 16
+ribosomal proteins used for CPR (Candidate Phyla Radiation) genomes, and works
+with any prokaryotic genomes and with your own marker sets.
 
-## Features
+- **One command** from a folder of genomes to a tree.
+- **Marker sets included:** 16 and 15 ribosomal proteins, RpS3, 16S rRNA,
+  GyrA and RecA, as HMM profiles with their marker lists.
+- **Strict concatenation:** a genome is used only when it has every listed
+  marker, and inconsistent alignments stop the run before any output is
+  written.
 
-- **Targeted Analysis**: Specializes in analyzing CPR genomes but is also applicable to other prokaryotic genomes.
-- **Flexibility**: Supports user-specified marker genes, allowing for customized phylogenetic studies.
-- **Ease of Use**: Provides a simple command-line interface for running comprehensive phylogenetic analyses.
+## Workflow
 
-## System Requirements
-
-CRiSM is designed to run on Unix-like operating systems (Linux, macOS). It requires Python 3.6 or newer.
+```text
+   genomes/*.fna
+        │  reformat      clean file and sequence names
+        │  find          genes with Prodigal, markers with HMMER (E = 1e-5)
+        │  extract       genomes that contain every listed marker
+        │  combine       one FASTA per marker
+        │  align, trim   MUSCLE (-super5), trimAl (-automated1)
+        │  concatenate   one supermatrix row per genome
+        │  tree          IQ-TREE 2 (-st AA -bb 1000 -m LG+G4+FO+I)
+        ▼
+   output/  marker alignments, supermatrix, tree
+```
 
 ## Installation
 
-### Install Python and Conda
-
-If you do not have Python or Conda installed, we recommend installing [Miniconda](https://docs.conda.io/en/latest/miniconda.html) as it includes both and allows for easy setup of environments.
-
-### Setting up a Conda Environment
-
-Create a new Conda environment to manage the dependencies for CRiSM separately:
+CRiSM runs on Linux and macOS with Python 3.6 or later. A Conda environment
+keeps it and its tools together:
 
 ```bash
 conda create -n crism python=3.8
 conda activate crism
-```
+conda install -c bioconda -y prodigal hmmer muscle trimal iqtree biopython
 
-### Install CRiSM
-
-Install from this repository (in your activated environment):
-
-```bash
 git clone https://github.com/DaikiKumakura/CRiSM.git
 cd CRiSM
 python -m pip install .
 ```
 
-### Install External Bioinformatics Tools
+The pipeline calls `prodigal`, `hmmsearch`, `cut`, `muscle`, `trimal` and
+`iqtree2` by these names, so they must be on `PATH`:
 
-Install the required bioinformatics tools using Conda from the Bioconda channel:
-
-```bash
-conda install -c bioconda -y prodigal hmmer muscle trimal iqtree biopython
-```
-
-The pipeline invokes `prodigal`, `hmmsearch`, `cut`, `muscle`, `trimal`, and `iqtree2` by these executable names. They must be on PATH. MUSCLE must support the version-5 `-super5` interface; MUSCLE 3 is not compatible with the implemented command. Check `iqtree2 --version` after installation, since the Conda package name alone does not guarantee this executable is available. `cut` is supplied by the Unix environment.
-
-The Python smoke checks below can run without these external tools; passing them does not establish compatibility of the full toolchain.
+- MUSCLE must be version 5 (the `-super5` option); MUSCLE 3 does not work.
+- Check `iqtree2 --version`: the Conda package name alone does not guarantee
+  this executable.
+- `cut` comes with the Unix environment.
 
 ## Usage
 
-To run CRiSM, use the following command format:
-
 ```bash
-crism -i <input_dir> -o <output_dir> --db <markergene.hmm> --list <markergene_list.txt> -t <threads>
+crism -i genomes/ -o output/ \
+  --db crism/data/marker_and_list/rp16_marker.hmm \
+  --list crism/data/marker_and_list/rp16_marker_list.txt \
+  -t 8
 ```
 
-### Command Line Options
+| Option | Meaning |
+|---|---|
+| `-i`, `--input` | folder with the genome files (`.fna` or `.fasta`) |
+| `-o`, `--output` | folder for the results |
+| `--db` | HMM profile file of the markers |
+| `--list` | file listing the marker names to use |
+| `-t`, `--threads` | number of threads |
 
-- `-i`, `--input`: Specify the input directory containing the genome files (fna or fasta file).
-- `-o`, `--output`: Specify the output directory for the analysis results.
-- `--db`: Path to the HMM database file.
-- `--list`: Path to the file listing the marker genes.
-- `-t`, `--threads`: Number of threads to use for the analysis.
+## Marker sets
 
-## DESCRIPTION
+The files are in [`crism/data/marker_and_list/`](crism/data/marker_and_list/);
+each set is an `.hmm` file and a `_list.txt` file.
 
-CRiSM performs the following analysis steps:
+| Set | Files |
+|---|---|
+| 16 ribosomal proteins | `rp16_marker.hmm`, `rp16_marker_list.txt` |
+| 15 ribosomal proteins | `rp15_marker.hmm`, `rp15_marker_list.txt` |
+| Ribosomal protein S3 | `rps3_marker.hmm`, `rps3_marker_list.txt` |
+| 16S rRNA | `16SrRNA_marker.hmm`, `16SrRNA_marker_list.txt` |
+| GyrA | `gyrA_marker.hmm`, `gyrA_marker_list.txt` |
+| RecA | `recA_marker.hmm`, `recA_marker_list.txt` |
 
-1. **Reformat**: Replaces characters such as spaces, ".", ",", ":", ";" in fna file names and read names with "_".
-2. **Find**: Annotates using Prodigal and searches with HMMER at E=1E-5.
-3. **Extract**: Extracts marker sequences for organisms containing all specified markers from the database input.
-4. **Combine**: Combines marker sequences for each marker type.
-5. **Reformat**: Same as step 1.
-6. **Alignment & Trimming**: Aligns with MUSCLE using "-super5" and trims with TrimAl using "-automated1".
-7. **Concatenation**: Concatenates trimmed marker sequences for each organism.
-8. **Make tree**: Performs phylogenetic analysis using IQ-TREE2 with "-st AA -bb 1000 -m LG+G4+FO+I".　
+For your own markers, give an HMM file with profiles for them and a list of
+their names.
 
-## CITATION
+## Status
 
-If you use CRiSM in your research, please cite the following:
+- `python -m unittest -q` checks FASTA reformatting from another working
+  directory, concatenation rules and failure propagation; these checks run on
+  GitHub Actions for every push. They do not need the external tools.
+- On 2026-10-03, the wheel was built and installed into an isolated folder;
+  the command-line help, FASTA reformatting and the bundled HMM files were
+  checked.
+- Marker discovery, alignment and tree inference on real genomes have **not**
+  been run in these checks, so the complete workflow and its scientific
+  results are not validated.
 
-Kumakura, D. (2024). CRiSM: Concatenated Ribosomal Sequence Marker gene package for phylogenetic analysis. GitHub repository. Available at [https://github.com/DaikiKumakura/CRiSM](https://github.com/DaikiKumakura/CRiSM).
+## Citation
 
-## Contributing
-
-Contributions to CRiSM are welcome! If you have suggestions for improvements or new features, please fork the repository, make your changes, and submit a pull request.
+Kumakura, D. (2024). CRiSM: Concatenated Ribosomal Sequence Marker gene
+package for phylogenetic analysis. <https://github.com/DaikiKumakura/CRiSM>.
+The citation metadata is in [`CITATION.cff`](CITATION.cff). Please also cite
+Prodigal, HMMER, MUSCLE, trimAl and IQ-TREE.
 
 ## License
 
-CRiSM is released under the MIT License. See the LICENSE file in the project repository for more details.
-
-## Minimal validation
-
-`python -m unittest -q` checks FASTA reformatting from another working directory and failure propagation. These checks do not validate the complete phylogenetic workflow or its scientific results. External tools listed above are still required.
-
-On 2026-10-03, the wheel was also built and installed into an isolated directory. CLI help, FASTA reformatting from another working directory, and inclusion of the bundled HMM files were verified. Full marker discovery, alignment and tree inference were not executed.
-
-Concatenation requires every listed marker, equal nonzero lengths within each alignment, and identical unique sample IDs across markers. Invalid inputs stop before writing the concatenated output; sample order is deterministic. Lightweight GitHub Actions checks run on pushes and pull requests. Full biological validation is outside these checks.
-
-## Related writing
-
-- [CRiSM on the author's site](https://daikikumakura.github.io/software/crism.html): summary, status and links.
+MIT
