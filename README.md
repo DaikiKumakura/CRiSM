@@ -115,10 +115,11 @@ their names.
 
 ## Citation
 
-Kumakura, D. (2024). CRiSM: Concatenated Ribosomal Sequence Marker gene
-package for phylogenetic analysis. <https://github.com/DaikiKumakura/CRiSM>.
-The citation metadata is in [`CITATION.cff`](CITATION.cff). Please also cite
-Prodigal, HMMER, MUSCLE, trimAl and IQ-TREE.
+Kumakura, D. (2024). *CRiSM: Concatenated Ribosomal Sequence Marker gene* [Software]. [GitHub repository](https://github.com/DaikiKumakura/CRiSM).
+
+Citation metadata: [CITATION.cff](CITATION.cff).
+
+Also cite Prodigal, HMMER, MUSCLE, trimAl and IQ-TREE as applicable.
 
 ## License
 
