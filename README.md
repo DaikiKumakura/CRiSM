@@ -21,21 +21,6 @@ with any prokaryotic genomes and with your own marker sets.
   marker, and inconsistent alignments stop the run before any output is
   written.
 
-## Workflow
-
-```text
-   genomes/*.fna
-        │  reformat      clean file and sequence names
-        │  find          genes with Prodigal, markers with HMMER (E = 1e-5)
-        │  extract       genomes that contain every listed marker
-        │  combine       one FASTA per marker
-        │  align, trim   MUSCLE (-super5), trimAl (-automated1)
-        │  concatenate   one supermatrix row per genome
-        │  tree          IQ-TREE 2 (-st AA -bb 1000 -m LG+G4+FO+I)
-        ▼
-   output/  marker alignments, supermatrix, tree
-```
-
 ## Installation
 
 CRiSM runs on Linux and macOS with Python 3.6 or later. A Conda environment
@@ -59,7 +44,9 @@ The pipeline calls `prodigal`, `hmmsearch`, `cut`, `muscle`, `trimal` and
   this executable.
 - `cut` comes with the Unix environment.
 
-## Usage
+<a id="usage"></a>
+
+## Quick start
 
 ```bash
 crism -i genomes/ -o output/ \
@@ -75,6 +62,21 @@ crism -i genomes/ -o output/ \
 | `--db` | HMM profile file of the markers |
 | `--list` | file listing the marker names to use |
 | `-t`, `--threads` | number of threads |
+
+## Workflow
+
+```text
+   genomes/*.fna
+        │  reformat      clean file and sequence names
+        │  find          genes with Prodigal, markers with HMMER (E = 1e-5)
+        │  extract       genomes that contain every listed marker
+        │  combine       one FASTA per marker
+        │  align, trim   MUSCLE (-super5), trimAl (-automated1)
+        │  concatenate   one supermatrix row per genome
+        │  tree          IQ-TREE 2 (-st AA -bb 1000 -m LG+G4+FO+I)
+        ▼
+   output/  marker alignments, supermatrix, tree
+```
 
 ## Marker sets
 
