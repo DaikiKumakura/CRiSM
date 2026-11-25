@@ -63,6 +63,10 @@ crism -i genomes/ -o output/ \
 | `--list` | file listing the marker names to use |
 | `-t`, `--threads` | number of threads |
 
+## Documentation
+
+[Workflow](#workflow) · [Marker sets](#marker-sets)
+
 ## Workflow
 
 ```text
@@ -95,7 +99,9 @@ each set is an `.hmm` file and a `_list.txt` file.
 For your own markers, give an HMM file with profiles for them and a list of
 their names.
 
-## Status
+<a id="status"></a>
+
+## Validation and limitations
 
 - `python -m unittest -q` checks FASTA reformatting from another working
   directory, concatenation rules and failure propagation; these checks run on
