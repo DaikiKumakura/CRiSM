@@ -116,4 +116,4 @@ Prodigal, HMMER, MUSCLE, trimAl and IQ-TREE.
 
 ## License
 
-MIT
+This project is licensed under MIT. See [LICENSE](LICENSE) for the license terms.
