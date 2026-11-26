@@ -27,6 +27,14 @@ crism -i genomes/ -o output/ \
   -t 8
 ```
 
+**What goes in.** A folder with one nucleotide FASTA file per genome (`.fna` or `.fasta`); no example genomes are
+bundled, so use any prokaryotic genomes you have, for example from NCBI. **What comes out.** One numbered folder
+per step in `output/` (`01_reformat_fna` to `08_tree`). The tree is
+`output/08_tree/Dataset1_cat.trimmed.treefile` (Newick, with IQ-TREE's 1000 ultrafast bootstrap supports); the
+concatenated alignment it was built from is in `output/07_cat/`. The run ends with the line
+`Pipeline completed successfully.` These names come from the pipeline code; the complete run has not been
+validated on real genomes (see [Validation and limitations](#validation-and-limitations)).
+
 ## Documentation
 
 [Usage guide](https://github.com/DaikiKumakura/CRiSM/blob/main/README-GUIDE.md)
